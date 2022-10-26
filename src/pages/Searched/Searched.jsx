@@ -3,10 +3,12 @@ import {useParams} from 'react-router-dom'
 import Card from '../../components/Card/Card';
 import { StyledWrapper } from "./Searched-styles";
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { MdOutlineErrorOutline } from 'react-icons/md';
 
 
 const Searched = () => {
   const [results, setResults] = useState([]);
+  const [weather, setWeather] = useState();
 
   const params = useParams();
 
@@ -18,7 +20,9 @@ const Searched = () => {
       .then((data) => data.json())
       .then((res) => {
         setResults(res)
+        setWeather(res.weather[0])
       })
+      .catch((err) => console.log(err))
   }
 
   useEffect(() => {
@@ -28,17 +32,20 @@ const Searched = () => {
   console.log(results)
   return (
     <StyledWrapper>
-      
-        {console.log(results)}
-        {/* {results?.map((item) => { */}
-            <Card>
-              <FaMapMarkerAlt />
-              <div>{results.name}</div>
-              {/* <img src={`https://openweathermap.org/img/w/${results.weather[0].icon}.png`} alt="" /> */}
-            </Card>
-          {/* ) */}
-        {/* }) */}
-        {/* } */}
+       
+        { results?.name ? (
+          <Card>
+            <FaMapMarkerAlt />
+            <div>{results?.name}, <span>{results?.sys?.country}</span></div>
+            <div>{weather?.id}</div>
+          </Card>
+        ) : (
+          <Card>
+            <MdOutlineErrorOutline color="red"/>
+            <div>{results.message}</div>
+          </Card>
+        )}
+        
     </StyledWrapper>
   )
 }

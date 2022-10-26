@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const Form = styled.form`
   width: 100%;
+  position: relative;
 
   input {
      background: linear-gradient(
@@ -35,5 +36,30 @@ export const InputWrapper = styled.div`
     color: white;
     font-size: 30px;
     z-index: 9;
+  }
+
+  datalist, option {
+    width: 100%
+  }
+`
+
+export const StyledOptions = styled.div`
+  position: absolute;
+  width: 100%;
+  max-width: 900px;
+  padding: 10;
+  background: linear-gradient(
+      to right bottom,
+      rgba(193, 221, 235, 0.7),
+      rgba(193, 221, 235, 0.3)
+    );
+  font-size: 1rem;
+  border-radius: 2rem;
+  padding: 20px 0;
+
+  p {
+    margin: 0 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(255, 255, 255, 0.5);
   }
 `
