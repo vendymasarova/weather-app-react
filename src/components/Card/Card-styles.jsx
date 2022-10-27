@@ -7,11 +7,13 @@ export const CardWrap = styled.div`
       to right bottom,
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.3)
+      /* display: flex; */
     );
-  display: flex;
   /* flex-direction: column; */
-  justify-content: space-between;
+  /* justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: 28px
+  justify-content: center; */
+  font-size: 28px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500
 `

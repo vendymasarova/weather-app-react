@@ -61,3 +61,9 @@ export const StyledArrow = styled.div`
   }
 `
 
+export const StyledBody = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`
+

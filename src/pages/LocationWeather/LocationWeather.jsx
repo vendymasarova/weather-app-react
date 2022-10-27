@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom'
 import Card from '../../components/Card/Card'
 import {
   Container,
-  StyledArrow
+  StyledArrow,
+  StyledBody
 } from "./LocationWeather-styles"
 import { WeatherContext } from '../../WeatherContext';
 import { useNavigate } from 'react-router-dom';
@@ -19,11 +20,11 @@ const Home = () => {
   }, [params.search])
 
   const goBack = () => {
-    navigate("/")
+    navigate("/" + params.search)
   }
 
   console.log(weather)
-  //dodělat ikonu
+  
 
   return (
     <>
@@ -32,15 +33,20 @@ const Home = () => {
     </StyledArrow>
     <Container>
       <Card>
-        <div>
-          <p>{weather?.name}</p>
-          <p>{weather?.weather[0].main}</p>
-          <p>{weather?.weather[0].description}</p>
-        </div>
-        <div>
-          <p>{Math.round(weather.main.temp)}</p>
-          <p>{weather.main.temp_min}, {weather.main.temp_max} </p>
-        </div>
+        <StyledBody>
+            <div>
+              <p>{weather?.name}</p>
+              <p>{weather?.weather[0].main}</p>
+              <p>{weather?.weather[0].description}</p>
+            </div>
+            <div>
+              <p>{Math.round(weather.main.temp)}</p>
+              {weather.main.temp_min !== weather.main.temp_max && (
+                <p>{Math.round(weather.main.temp_min)}, {Math.round(weather.main.temp_max)} </p>
+              )}
+              <img src={`https://openweathermap.org/img/w/${weather?.weather[0].icon}.png`} alt={weather?.weather[0].icon} />
+            </div>
+        </StyledBody>
       </Card>
     </Container>
     </>
