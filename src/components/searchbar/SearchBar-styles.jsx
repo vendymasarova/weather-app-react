@@ -20,8 +20,13 @@ export const Form = styled.form`
     padding-bottom: 1.5rem;
     padding-left: 3.5rem;
     font-size: 20px;
-    z-index: 9;
+
+    &:focus {
+      border-radius: 2rem 2rem 0 0;
+    }
   }
+
+
 `
 
 export const InputWrapper = styled.div`

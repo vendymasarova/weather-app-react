@@ -7,13 +7,12 @@ import {
   Form,
   StyledOptions
  } from './SearchBar-styles';
+import {DataList} from "react-datalist-field";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
   const [citties, setCitties] = useState([]);
-  const [country, setCountry] = useState([]);
-  const [suggestion, setSuggestion] = useState([])
 
   const onSubmit = ((e) => {
     e.preventDefault();
@@ -25,29 +24,27 @@ const SearchBar = () => {
     fetch('city.list.json')
     .then((blob) => blob.json())
     .then((data) => {
-      setCitties(() => data.map((city) => city.name))
+      setCitties(() => data.map((city) => city))
     })
   }, [])
   // console.log(suggestion)
 
-  const suggestions = citties.filter((city) => city.toLowerCase().startsWith(input))
+  const suggestions = citties.filter((city) => city.name.toLowerCase().startsWith(input))
   return (
     <Form onSubmit={onSubmit}>
       <InputWrapper>
         <input type="text" list='city' value={input} onChange={((e) => setInput(e.target.value))} />
         <FaSearch />
       </InputWrapper>
-      <div>
         {input && (
-          <StyledOptions id='city'>
+          <datalist id='city'>
             {suggestions.slice(0, 5).map(item => {
               return (
-                <p key={item}>{item}</p>
+                <option key={item.id}>{item.name}, {item.country}</option>
               )
             })}
-          </StyledOptions>
+          </datalist>
         )}
-      </div>
     </Form>
   )
 }
