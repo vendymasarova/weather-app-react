@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import { FaSearch, FaStarOfDavid } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import {
   InputWrapper,
   Form,
-  StyledOptions
  } from './SearchBar-styles';
-import {DataList} from "react-datalist-field";
 
-const SearchBar = () => {
+const SearchBar = ({item}) => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
   const [citties, setCitties] = useState([]);
 
   const onSubmit = ((e) => {
     e.preventDefault();
-    navigate("/searched/" + input)
+    navigate("/" + input)
     setInput("")
   })
 
   useEffect(() => {
-    fetch('city.list.json')
+    fetch('./city.list.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
     .then((blob) => blob.json())
     .then((data) => {
       setCitties(() => data.map((city) => city))
     })
   }, [])
-  // console.log(suggestion)
 
   const suggestions = citties.filter((city) => city.name.toLowerCase().startsWith(input))
   return (

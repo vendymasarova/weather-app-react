@@ -11,6 +11,6 @@ export const Container = styled.div`
   max-width: 900px;
 `
 
-export const StyledWrapper = styled.div`
+export const StyledCardWrapper = styled.div`
   margin-top: 20px;
 `

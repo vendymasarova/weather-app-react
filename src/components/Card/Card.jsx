@@ -3,9 +3,9 @@ import {
   CardWrap 
 } from './Card-styles'
 
-const Card = ({children}) => {
+const Card = ({ children, onClick }) => {
   return (
-    <CardWrap>
+    <CardWrap onClick={onClick}>
       {children}
     </CardWrap>
   )

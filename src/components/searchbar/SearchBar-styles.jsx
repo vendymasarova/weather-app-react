@@ -20,10 +20,6 @@ export const Form = styled.form`
     padding-bottom: 1.5rem;
     padding-left: 3.5rem;
     font-size: 20px;
-
-    &:focus {
-      border-radius: 2rem 2rem 0 0;
-    }
   }
 
 

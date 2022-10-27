@@ -13,7 +13,7 @@ function App() {
         <BrowserRouter>
           <Wrapper>
             <Container>
-              <SearchBar />
+              {/* <SearchBar /> */}
               <Pages />
             </Container>
           </Wrapper>

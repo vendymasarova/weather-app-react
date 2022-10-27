@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import Card from '../../components/Card/Card';
-import { StyledWrapper } from "./Searched-styles";
+import { StyledCardWrapper } from "./Searched-styles";
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { MdOutlineErrorOutline } from 'react-icons/md';
-
+import Loader from '../../components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
+import SearchBar from '../../components/searchbar/SearchBar';
 
 const Searched = () => {
   const [results, setResults] = useState([]);
-  const [weather, setWeather] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
+
 
   const params = useParams();
 
@@ -20,33 +24,45 @@ const Searched = () => {
       .then((data) => data.json())
       .then((res) => {
         setResults(res)
-        setWeather(res.weather[0])
       })
       .catch((err) => console.log(err))
+    setIsLoaded(true)
+  }
+
+  const goHome = () => {
+    navigate("/location/")
   }
 
   useEffect(() => {
     getForecast(params.search)
   }, [params.search])
 
-  console.log(results)
   return (
-    <StyledWrapper>
-       
-        { results?.name ? (
-          <Card>
-            <FaMapMarkerAlt />
-            <div>{results?.name}, <span>{results?.sys?.country}</span></div>
-            <div>{weather?.id}</div>
-          </Card>
-        ) : (
-          <Card>
-            <MdOutlineErrorOutline color="red"/>
-            <div>{results.message}</div>
-          </Card>
-        )}
+    <>
+      <SearchBar />
+       {isLoaded ? (
+        <StyledCardWrapper>
+        {
+          results.name ? (
+            <Card onClick={goHome}>
+              <FaMapMarkerAlt />
+              <div>{results?.name}, {results?.sys?.country}</div>
+              <span>{Math.round(results?.main?.temp)} °C</span>
+            </Card>
+          ) : (
+            <Card>
+              <MdOutlineErrorOutline color="red" />
+              <div>{results.message}</div>
+            </Card>
+          )
+        }
+        </StyledCardWrapper>
+       ) : (
+        <Loader />
+       )}
         
-    </StyledWrapper>
+        
+    </>
   )
 }
 
