@@ -12,7 +12,7 @@ const Pages = () => {
     <Routes location={location} key={location.pathname}>
       <Route path="/" element={<Home />} /> 
       <Route path="/:search" element={<Searched />} /> 
-      <Route path="/location/" element={<LocationWeather />} /> 
+      <Route path="/location/:search" element={<LocationWeather />} /> 
     </Routes>
   )
 }

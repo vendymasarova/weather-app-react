@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import Card from '../../components/Card/Card';
 import { StyledCardWrapper } from "./Searched-styles";
@@ -7,35 +7,22 @@ import { MdOutlineErrorOutline } from 'react-icons/md';
 import Loader from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../components/searchbar/SearchBar';
+import { WeatherContext } from '../../WeatherContext';
 
 const Searched = () => {
-  const [results, setResults] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
-
-
+  const { weather, isLoaded, getForecast } = useContext(WeatherContext)
   const params = useParams();
 
-  const apiBase = "https://api.openweathermap.org/data/2.5/";
-  const apiKey = "7e899a6bac8e971b5d493c29dfe5b62c"
-
-  const getForecast = async (query) => {
-    await fetch(`${apiBase}weather?q=${query}&appid=${apiKey}&units=metric`)
-      .then((data) => data.json())
-      .then((res) => {
-        setResults(res)
-      })
-      .catch((err) => console.log(err))
-    setIsLoaded(true)
-  }
-
   const goHome = () => {
-    navigate("/location/")
+    navigate("/location/" + params.search)
   }
 
   useEffect(() => {
     getForecast(params.search)
   }, [params.search])
+
+  console.log(isLoaded)
 
   return (
     <>
@@ -43,16 +30,16 @@ const Searched = () => {
        {isLoaded ? (
         <StyledCardWrapper>
         {
-          results.name ? (
+          weather.name ? (
             <Card onClick={goHome}>
               <FaMapMarkerAlt />
-              <div>{results?.name}, {results?.sys?.country}</div>
-              <span>{Math.round(results?.main?.temp)} °C</span>
+              <div>{weather?.name}, {weather?.sys?.country}</div>
+              <span>{Math.round(weather?.main?.temp)} °C</span>
             </Card>
           ) : (
             <Card>
               <MdOutlineErrorOutline color="red" />
-              <div>{results.message}</div>
+              <div>{weather.message}</div>
             </Card>
           )
         }
@@ -60,8 +47,6 @@ const Searched = () => {
        ) : (
         <Loader />
        )}
-        
-        
     </>
   )
 }

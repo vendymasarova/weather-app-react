@@ -5,7 +5,7 @@ export const Form = styled.form`
   position: relative;
 
   input {
-     background: linear-gradient(
+    background: linear-gradient(
       to right bottom,
       rgba(255, 255, 255, 0.7),
       rgba(255, 255, 255, 0.3)

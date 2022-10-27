@@ -9,7 +9,8 @@ export const CardWrap = styled.div`
       rgba(255, 255, 255, 0.3)
     );
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  justify-content: space-between;
   align-items: center;
   justify-content: center;
   font-size: 28px

@@ -1,9 +1,17 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
-export const Wrapper = styled.div`
-  position: relative;
-  background-color: blue;
+export const scale = keyframes`
+  0% {
+    /* stroke-dashoffset: 471; */
+    transform: scale(0.7);
+  }
+  100% {
+    /* stroke-dashoffset: 0; */
+    transform: scale(1);
+  } 
 `
+
+ 
 
 export const Container = styled.div`
   max-width: 900px;
@@ -13,27 +21,43 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `
 
-export const Figure = styled.div`
+export const StyledArrow = styled.div`
+  width: 50px;
+  height: 50px;
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`
-
-export const Body = styled.div`
-  position: relative;
+  top: 50px;
+  left: 50px;
+  border-radius: 50%;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  backdrop-filter: blur(2rem);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+
+  svg {
+    font-size: 25px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+     background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.7)
+  );
+    animation: ${scale} 1s linear infinite alternate;
+    z-index: -1;
+    border-radius: 50%;
+  }
 `
+
