@@ -1,17 +1,4 @@
-import styled, { keyframes } from "styled-components"
-
-export const scale = keyframes`
-  0% {
-    /* stroke-dashoffset: 471; */
-    transform: scale(0.7);
-  }
-  100% {
-    /* stroke-dashoffset: 0; */
-    transform: scale(1);
-  } 
-`
-
- 
+import styled from "styled-components"
 
 export const Container = styled.div`
   max-width: 900px;
@@ -24,46 +11,21 @@ export const Container = styled.div`
   flex-direction: column;
 `
 
-export const StyledArrow = styled.div`
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  border-radius: 50%;
-  background: linear-gradient(
-    to right bottom,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.3)
-  );
-  backdrop-filter: blur(2rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    font-size: 25px;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 60px;
-    height: 60px;
-     background: linear-gradient(
-    to right bottom,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.7)
-  );
-    animation: ${scale} 1s linear infinite alternate;
-    z-index: -1;
-    border-radius: 50%;
-  }
-`
-
 export const StyledBody = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 100%;
+`
+
+export const StyledButtonWrapper = styled.div`
+  position: absolute;
+  top: 40px;
+  left: 40px;
+`
+
+export const StyledGrid = styled.div`
+  display: grid;
+  grid-gap: 40px;
+  margin-top: 120px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 `
 

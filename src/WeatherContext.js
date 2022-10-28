@@ -20,7 +20,7 @@ export const WeatherContext = createContext();
    }
 
   return (
-    <WeatherContext.Provider value={{ weather, isLoaded, getForecast  }}>{children}</WeatherContext.Provider>
+    <WeatherContext.Provider value={{ weather, setWeather, isLoaded, getForecast  }}>{children}</WeatherContext.Provider>
   )
 }
 
