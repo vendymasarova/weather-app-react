@@ -7,20 +7,21 @@ import {
  } from './SearchBar-styles';
 
 interface Props {
-	onClick: () => void;
-}
-
-interface HandleProps {
-  target: HTMLInputElement;
+  onClick: () => void;
+  target?: HTMLInputElement;
+  item?: object,
+  city?: object,
+  name?: string,
+  id?: number,
+  country?: string,
 }
 
 interface ObjecrProps {
-  item: object,
-  city: object,
-  name: string,
-  id: number,
-  country: string,
-
+  item?: object,
+  city?: object,
+  name?: string,
+  id?: number,
+  country?: string,
 }
 
 const SearchBar = ({item}: ObjecrProps) => {

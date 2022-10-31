@@ -5,7 +5,7 @@ import {
 
 interface Props {
 	children: ReactNode;
-	onClick: () => void;
+	onClick?: () => void;
 }
 
 const Card = ({ children, onClick }:Props) => {

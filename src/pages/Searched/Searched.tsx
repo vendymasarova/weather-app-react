@@ -9,7 +9,7 @@ import Loader from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../components/searchbar/SearchBar';
 import { WeatherContext } from '../../WeatherContext';
-import Button from '../../components/Button/Button';
+import {Button} from '../../components/Button/Button';
 
 const Searched = () => {
   const navigate = useNavigate();

@@ -1,6 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
 import { Wrapper, Figure, Body, Container } from "./App-styles";
-import SearchBar from "./components/searchbar/SearchBar";
 import Pages from "./pages/Pages";
 import { WeatherProvider } from "./WeatherContext";
 

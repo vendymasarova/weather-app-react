@@ -1,6 +1,13 @@
 import React, {useState, createContext, ReactNode} from 'react';
 
-export const WeatherContext = createContext();
+interface GlobalContent {
+  weather: object
+  setWeather: any
+  isLoaded: boolean
+  getForecast?: string
+}
+
+export const WeatherContext = createContext<GlobalContent>();
 
 
 interface Props {
@@ -8,8 +15,8 @@ interface Props {
 }
 
  export function WeatherProvider({children}: Props) {
-  const [weather, setWeather] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [weather, setWeather] = useState ([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
    const apiBase = "https://api.openweathermap.org/data/2.5/";
    const apiKey = "7e899a6bac8e971b5d493c29dfe5b62c"
