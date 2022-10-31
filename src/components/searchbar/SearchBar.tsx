@@ -6,12 +6,29 @@ import {
   Form,
  } from './SearchBar-styles';
 
-const SearchBar = ({item}) => {
-  const [input, setInput] = useState("");
-  const navigate = useNavigate();
-  const [citties, setCitties] = useState([]);
+interface Props {
+	onClick: () => void;
+}
 
-  const onSubmit = ((e) => {
+interface HandleProps {
+  target: HTMLInputElement;
+}
+
+interface ObjecrProps {
+  item: object,
+  city: object,
+  name: string,
+  id: number,
+  country: string,
+
+}
+
+const SearchBar = ({item}: ObjecrProps) => {
+  const [input, setInput] = useState<string>("");
+  const navigate = useNavigate();
+  const [citties, setCitties] = useState<any>([]);
+
+  const onSubmit = ((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate("/" + input)
     setInput("")
@@ -26,11 +43,11 @@ const SearchBar = ({item}) => {
     })
     .then((blob) => blob.json())
     .then((data) => {
-      setCitties(() => data.map((city) => city))
+      setCitties(() => data.map((city: object) => city))
     })
   }, [])
 
-  const suggestions = citties.filter((city) => city.name.toLowerCase().startsWith(input))
+  const suggestions = citties.filter((city: { name: string; }) => city.name.toLowerCase().startsWith(input))
   return (
     <Form onSubmit={onSubmit}>
       <InputWrapper>
@@ -39,7 +56,7 @@ const SearchBar = ({item}) => {
       </InputWrapper>
         {input && (
           <datalist id='city'>
-            {suggestions.slice(0, 5).map(item => {
+            {suggestions.slice(0, 5).map((item: { id: React.Key | null | undefined; name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; country: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; }) => {
               return (
                 <option key={item.id}>{item.name}, {item.country}</option>
               )

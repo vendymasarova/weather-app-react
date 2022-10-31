@@ -9,39 +9,46 @@ import {
 } from "./LocationWeather-styles"
 import { WeatherContext } from '../../WeatherContext';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import {Button} from '../../components/Button/Button';
 
 const Home = () => {
   const { weather, setWeather, getForecast } = useContext(WeatherContext)
   const [favouriteLocations, setFavouriteLocations] = useState(weather)
   const params = useParams();
   const navigate = useNavigate();
-
-  const obj = [{
-    name: weather.name,
-  }]
-
-  console.log(weather)
   
   useEffect(() => {
-     localStorage.setItem("array", JSON.stringify([weather, {name: weather.name}]));
+    
+
   }, [weather])
 
+  // useEffect(() => {
+    // if (localStorage.getItem("array") == null) {
+      localStorage.setItem("array", '[]')
+      const newData = weather
+    // }
+    let oldData = JSON.parse(localStorage.getItem("array"))
+
+    oldData.push(weather)
+    console.log(oldData)
+    localStorage.setItem("array", JSON.stringify(oldData))
+    let output = JSON.parse(localStorage.getItem("array"))
+    output = [...oldData, weather]
+    localStorage.setItem("array", JSON.stringify(output))
+  console.log(weatherData)
+    const weatherData = JSON.parse(localStorage.getItem("array"))
+
+
+  // }, [])
+
   useEffect(() => {
-    const check = (JSON.parse(localStorage.getItem("array")))
-    if(check) {
-        setFavouriteLocations(check)
-      }
-
-  }, [])
-
-  useEffect(() => {
-
+    getForecast(params.search)
   }, [params.search])
 
   const goBack = () => {
     navigate("/" + params.search)
   }
+  
 
   return (
     <>
@@ -51,18 +58,17 @@ const Home = () => {
       </Button>
     </StyledButtonWrapper>
     <StyledGrid>
-        {/* {console.log(weather)} */}
-        {/* {favouriteLocations?.map((item) => {
+        {weatherData?.map((item) => {
           console.log(item)
           return (
             <Card>
               <div>
                 <p>{item.name}</p>
-                <p>{item.description}</p>
+                {/* <p>{item.description}</p> */}
               </div>
             </Card>
           )
-        })} */}
+        })}
       <Card>
         <StyledBody>
             <div>
